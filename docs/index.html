@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Der interaktive Persönlichkeitstest: Welcher Lehrer wärst du?"
+    />
+    <meta name="theme-color" content="#17324d" />
+    <meta property="og:title" content="Welcher Lehrer wärst du?" />
+    <meta
+      property="og:description"
+      content="10 Fragen, 12 mögliche Ergebnisse – finde deinen Lehrer-Typ."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://sebastianzobel.github.io/Lehrerquiz/"
+    />
+    <link
+      rel="canonical"
+      href="https://sebastianzobel.github.io/Lehrerquiz/"
+    />
+    <title>Welcher Lehrer wärst du?</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#app">Direkt zum Quiz</a>
+
+    <div class="page-shell">
+      <header class="masthead" aria-label="Schülerzeitung">
+        <div class="masthead__rule" aria-hidden="true"></div>
+        <div class="masthead__row">
+          <span>Persönlichkeitstest</span>
+          <span class="masthead__title">PAUSENPOST</span>
+          <span>Extra-Ausgabe</span>
+        </div>
+        <div class="masthead__rule masthead__rule--heavy" aria-hidden="true"></div>
+      </header>
+
+      <main id="app" class="app" tabindex="-1">
+        <section id="intro-screen" class="screen intro-screen" aria-labelledby="intro-title">
+          <div class="intro-copy">
+            <p class="eyebrow">Der große Typencheck</p>
+            <h1 id="intro-title">
+              Welcher Lehrer<br />
+              wärst <span>DU?</span>
+            </h1>
+            <p class="intro-text">
+              Kreativer Kopf, Energiebündel, ruhiger Tüftler oder Team-Mensch?
+              Beantworte zehn kurze Fragen und finde heraus, welcher Lehrer-Typ
+              in dir steckt.
+            </p>
+            <div class="intro-actions">
+              <button id="start-button" class="primary-button" type="button">
+                Quiz starten <span aria-hidden="true">→</span>
+              </button>
+              <span class="duration">ca. 3 Minuten</span>
+            </div>
+          </div>
+
+          <div class="intro-art" aria-hidden="true">
+            <div class="burst">10<br /><small>Fragen</small></div>
+            <div class="notebook-card">
+              <span class="notebook-card__clip"></span>
+              <p>Es gibt kein</p>
+              <strong>RICHTIG</strong>
+              <span>oder</span>
+              <strong>FALSCH</strong>
+              <div class="scribble"></div>
+            </div>
+            <div class="pencil">✎</div>
+          </div>
+        </section>
+
+        <section id="quiz-screen" class="screen quiz-screen" hidden aria-labelledby="question-title">
+          <div class="quiz-topline">
+            <div>
+              <p id="section-label" class="eyebrow">Teil 1 · Was ist dein Ding?</p>
+              <p id="question-counter" class="question-counter">Frage 1 von 10</p>
+            </div>
+            <button id="restart-top" class="text-button" type="button">Neu starten</button>
+          </div>
+
+          <div
+            class="progress-track"
+            role="progressbar"
+            aria-label="Fortschritt"
+            aria-valuemin="1"
+            aria-valuemax="10"
+            aria-valuenow="1"
+          >
+            <div id="progress-fill" class="progress-fill"></div>
+          </div>
+
+          <article class="question-card">
+            <p id="question-kicker" class="question-kicker">01</p>
+            <h2 id="question-title" tabindex="-1">Frage wird geladen</h2>
+            <div id="answer-list" class="answer-list" role="group" aria-labelledby="question-title"></div>
+          </article>
+
+          <div class="quiz-footer">
+            <button id="back-button" class="back-button" type="button">
+              <span aria-hidden="true">←</span> Zurück
+            </button>
+            <p>Wähle die Antwort, die spontan am besten zu dir passt.</p>
+          </div>
+        </section>
+
+        <section id="tie-screen" class="screen tie-screen" hidden aria-labelledby="tie-title">
+          <div class="tie-card">
+            <p class="eyebrow">Fast geschafft</p>
+            <h2 id="tie-title">Punktgleichstand!</h2>
+            <p id="tie-copy">Welche Aussage passt einen Tick besser zu dir?</p>
+            <div id="tie-options" class="tie-options"></div>
+          </div>
+        </section>
+
+        <section id="result-screen" class="screen result-screen" hidden aria-labelledby="result-name">
+          <div class="result-heading">
+            <p class="eyebrow">Dein Ergebnis</p>
+            <p class="result-pretitle">Du wärst …</p>
+            <h2 id="result-name">Lehrername</h2>
+            <p id="result-tagline" class="result-tagline">Ergebnistyp</p>
+          </div>
+
+          <div class="result-grid">
+            <article class="result-copy-card">
+              <span id="result-stamp" class="result-stamp" aria-hidden="true">A1</span>
+              <p id="result-description"></p>
+              <div class="result-actions">
+                <button id="restart-button" class="primary-button" type="button">
+                  Nochmal spielen <span aria-hidden="true">↻</span>
+                </button>
+                <button id="print-button" class="secondary-button" type="button">
+                  Ergebnis drucken
+                </button>
+              </div>
+            </article>
+
+            <aside class="score-card" aria-labelledby="score-title">
+              <h3 id="score-title">Dein Profil</h3>
+              <div id="score-bars" class="score-bars"></div>
+              <p class="score-note">
+                Das Ergebnis ist augenzwinkernd gemeint – nicht wissenschaftlich,
+                aber hoffentlich ziemlich passend.
+              </p>
+            </aside>
+          </div>
+        </section>
+
+        <noscript>
+          <p class="noscript-message">
+            Für dieses interaktive Quiz muss JavaScript aktiviert sein.
+          </p>
+        </noscript>
+      </main>
+
+      <footer class="site-footer">
+        <span>Ein Quiz für die Schülerzeitung</span>
+        <span aria-hidden="true">A · B · C · D</span>
+      </footer>
+    </div>
+
+    <div id="live-region" class="sr-only" aria-live="polite"></div>
+  </body>
+</html>
